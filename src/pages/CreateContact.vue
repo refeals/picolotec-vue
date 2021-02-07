@@ -4,21 +4,21 @@
     <form>
       <div class="form-group">
         <label htmlFor="name">Name</label>
-        <input name="name" />
+        <input v-model="form.name" name="name" />
       </div>
 
       <div class="form-group">
         <label htmlFor="email">Email</label>
-        <input name="email" />
+        <input v-model="form.email" name="email" />
       </div>
 
       <div class="form-group">
         <label htmlFor="phone">Phone</label>
-        <input name="phone" />
+        <input v-model="form.phone" name="phone" />
       </div>
 
       <div class="form-group">
-        <button type="submit">Submit</button>
+        <button type="submit" @click.prevent="handleSubmit">Submit</button>
       </div>
     </form>
   </div>
@@ -31,6 +31,17 @@ export default {
   name: "CreateContact",
   components: {
     Header,
+  },
+  data: function() {
+    return {
+      form: { name: "", email: "", phone: "" },
+    }
+  },
+  methods: {
+    handleSubmit() {
+      this.$store.dispatch("createContact", this.form)
+      this.$router.push("/")
+    },
   },
 }
 </script>

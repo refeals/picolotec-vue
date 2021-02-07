@@ -43,10 +43,10 @@ const store = new Vuex.Store({
       state.contacts = payload.data
     },
     CREATE_CONTACT(state, payload) {
-      state.contacts = [...state, payload.data]
+      state.contacts = [...state.contacts, payload.data]
     },
     UPDATE_CONTACT(state, payload) {
-      state.contacts = state.map((contact) => {
+      state.contacts = state.contacts.map((contact) => {
         if (contact.id === payload.data.id) {
           return payload.data
         } else {

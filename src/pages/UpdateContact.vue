@@ -1,7 +1,26 @@
 <template>
   <div>
     <Header title="Update Contact" />
-    UpdateContact
+    <form>
+      <div class="form-group">
+        <label htmlFor="name">Name</label>
+        <input v-model="form.name" name="name" />
+      </div>
+
+      <div class="form-group">
+        <label htmlFor="email">Email</label>
+        <input v-model="form.email" name="email" />
+      </div>
+
+      <div class="form-group">
+        <label htmlFor="phone">Phone</label>
+        <input v-model="form.phone" name="phone" />
+      </div>
+
+      <div class="form-group">
+        <button type="submit" @click.prevent="handleSubmit">Submit</button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -12,6 +31,32 @@ export default {
   name: "UpdateContact",
   components: {
     Header,
+  },
+  data: function() {
+    return {
+      form: { id: -1, name: "", email: "", phone: "" },
+    }
+  },
+  mounted: function() {
+    const id = this.$route.params.id
+    const contact = this.$store.getters.getContactById(id)
+
+    if (contact) {
+      const { id, name, email, phone } = contact
+      this.form.id = id
+      this.form.name = name
+      this.form.email = email
+      this.form.phone = phone
+    } else {
+      this.$router.push("/")
+    }
+  },
+  methods: {
+    handleSubmit() {
+      const { id, name, email, phone } = this.form
+      this.$store.dispatch("updateContact", { id, name, email, phone })
+      this.$router.push("/")
+    },
   },
 }
 </script>

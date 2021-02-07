@@ -7,7 +7,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: { contacts: [] },
   getters: {
-    allContacts: (state) => state.contacts,
+    getContactById: (state) => (id) =>
+      state.contacts.find((c) => c.id === parseInt(id)),
   },
   actions: {
     getContacts({ commit }) {
@@ -24,9 +25,9 @@ const store = new Vuex.Store({
         .catch((err) => console.log(err))
     },
 
-    updateContact({ commit }, id, contactData) {
+    updateContact({ commit }, { id, name, email, phone }) {
       return api
-        .put(`/contacts/${id}`, { ...contactData })
+        .put(`/contacts/${id}`, { name, email, phone })
         .then(({ data }) => commit("UPDATE_CONTACT", data))
         .catch((err) => console.log(err))
     },

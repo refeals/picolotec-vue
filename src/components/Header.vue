@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "Header",
   props: {
     title: {
       type: String,

@@ -1,15 +1,12 @@
 <template>
-  <div>
-    <Header title="Create Contact" />
-    CreateContact
-  </div>
+  <div><Header />ContactList</div>
 </template>
 
 <script>
 import Header from "@/components/Header"
 
 export default {
-  name: "CreateContact",
+  name: "ContactList",
   components: {
     Header,
   },

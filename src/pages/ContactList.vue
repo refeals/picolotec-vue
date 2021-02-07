@@ -12,10 +12,10 @@
           <p class="contact-phone">{{ contact.phone }}</p>
         </div>
         <div class="item-buttons">
-          <button class="update-contact">
+          <router-link :to="`update/${contact.id}`" class="update-contact">
             Update
-          </button>
-          <button class="delete-contact">
+          </router-link>
+          <button class="delete-contact" v-on:click="handleDelete(contact.id)">
             Delete
           </button>
         </div>
@@ -39,6 +39,11 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getContacts")
+  },
+  methods: {
+    handleDelete: function(id) {
+      this.$store.dispatch("deleteContact", id)
+    },
   },
 }
 </script>
@@ -79,21 +84,25 @@ export default {
   flex-direction: column;
   gap: 4px;
 }
+.contact-list .contact-item .item-buttons a,
+.contact-list .contact-item .item-buttons a,
 .contact-list .contact-item .item-buttons button {
   border: 0;
   outline: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  font-size: 13px;
+  text-decoration: none;
 }
-.contact-list .contact-item .item-buttons button.update-contact {
+.contact-list .contact-item .item-buttons a.update-contact {
   background-color: #4a90e2;
 }
-.contact-list .contact-item .item-buttons button.update-contact:hover {
+.contact-list .contact-item .item-buttons a.update-contact:hover {
   background-color: #2275d7;
 }
 .contact-list .contact-item .item-buttons button.delete-contact {
@@ -101,9 +110,5 @@ export default {
 }
 .contact-list .contact-item .item-buttons button.delete-contact:hover {
   background-color: #cc283c;
-}
-.contact-list .contact-item .item-buttons button svg {
-  color: #fff;
-  font-size: 16px;
 }
 </style>

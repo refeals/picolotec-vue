@@ -1,12 +1,10 @@
 <template>
   <header>
-    <button>
+    <router-link to="/">
       Home
-    </button>
+    </router-link>
     <h1>{{ title }}</h1>
-    <button>
-      +
-    </button>
+    <router-link to="/create">+</router-link>
   </header>
 </template>
 
@@ -39,20 +37,20 @@ header h1 {
   font-size: 24px;
   font-weight: 700;
 }
-header button {
+header a {
   margin: 0;
   padding: 0;
   border: 0;
   outline: none;
-}
-header button svg {
-  font-size: 24px;
+  color: #2c2605;
+  text-decoration: none;
+  font-size: 18px;
   cursor: pointer;
   padding: 4px;
   border-radius: 4px;
   border: 1px solid rgba(44, 38, 5, 0.2);
 }
-header button svg:hover {
+header a:hover {
   background-color: rgba(44, 38, 5, 0.1);
 }
 </style>
